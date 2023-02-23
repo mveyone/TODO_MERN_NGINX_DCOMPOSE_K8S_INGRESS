@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  api:
+    image: mveyone/todo-mern-api
+    build: ./server
+    ports:
+      - "4000:4000"
+    expose:
+      - "4000"
+    networks:
+      - mern-app
+    # env_file: ./server/config/${ENV}.env
+  client:
+    image: mveyone/todo-build-nginx-prod
+    build: ./client
+    # stdin: true
+    ports:
+      - "3000:3000"
+    
+    networks:
+      - mern-app
+
+networks:
+  mern-app:
+    driver: bridge
